@@ -5,6 +5,7 @@ int main(){
     for(auto num: nums){
         cout<<num<< " ";
     }
+   
     //best way to find the MIN val in a vector
     auto it = min_element(nums.begin(), nums.end()); //returns a iterator
     if(it != nums.end()){
@@ -12,19 +13,7 @@ int main(){
     }else   
         cout<<"not found!";
     
-    
 
-
-
-
-
-
-
-
-
-
-
-    /*
     //smarter way to find the MIN val in a vector
     sort(nums.begin(), nums.end());            // gotcha sort it beforing 'lower_bound'
     auto it = upper_bound(nums.begin(), nums.end(),INT_MIN);   // 'INT_MIN' to specifically find the Lowest val
@@ -32,9 +21,6 @@ int main(){
         cout<<endl<<*it;
     }else 
         cout<<"Not found!"<<endl;
-    
-    */
-
 
     
     //basic method to find the mind val
