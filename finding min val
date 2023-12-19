@@ -1,0 +1,11 @@
+//basic method to find the mind val
+    int min = 0 ;
+    for(int i = 0; i < nums.size(); ++i){
+        for(int j =i+1; j < nums.size(); ++j){
+            if(nums[j] < nums[min]){
+                min = j;
+            }
+        }
+    }
+    cout<<endl<<min<<endl;
+    cout<<nums[min];
