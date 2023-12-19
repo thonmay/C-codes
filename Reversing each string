@@ -1,0 +1,12 @@
+//reversing each string in vector
+
+vector<string> names {"Thonmay", "Seb", "Charles", "KIMI", "Hamilton"};
+    vector<string> reversedNames {};
+
+    for(auto name: names){
+        string revStr(name.rbegin(), name.rend());
+        reversedNames.push_back(revStr);
+    }
+    for(auto name: reversedNames){
+        cout<<name<<" ";
+    }
