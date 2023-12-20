@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+public:
+    int value;
+    Node* next;
+};
+// let's print the elements
+void printList(Node*n){
+    while (n != NULL)
+    {
+        cout<< n->value<< endl;
+        n = n->next;
+    }    
+} 
+// let's add element in front of the linked list
+void addingInFront(Node**head, int newValue){
+    //prepare new node
+    Node* newNode = new Node();
+    newNode->value = newValue;
+    //new node pointing towards head
+    newNode->next = *head;
+    // replace head with new node
+    *head = newNode;
+
+}
+
+// adding in a specific place
+void insetAfter(Node*previous, int newValue){
+    //prepare new node
+    Node* newNode = new Node();
+    newNode->value = newValue;
+    // check the previous node if it's NULL or not
+    if(previous == NULL){
+        cout<<"Previous element can't be NULL";
+        return;
+    }
+    // link them properly
+    newNode->next = previous->next;
+    // previous element linked with new element
+    previous->next = newNode; 
+}
+
+//inset in the end
+void insertInTail(Node**head, int newValue){
+    // prepare new node and point it to NULL
+    Node* newNode = new Node();
+    newNode->value = newValue;
+    newNode->next = NULL;
+    // if the list is empty new element will be the head
+    if(*head == NULL){
+        *head = newNode;
+        return;
+    }
+    //find the last element
+    Node* last = *head;
+    while(last->next != NULL)
+    {
+        last = last->next;
+    }
+    //link the new node with the last node
+    last->next = newNode;
+
+}
+
+int main(){
+    Node* head = new Node();          // creating pointer to the elements and providing memory space  
+    Node* second = new Node();
+    Node* third = new Node();
+    Node* fourth = new Node();
+
+    head->value = 56;                 // assinging value to the elements and linking them
+    head->next = second;
+    second->value = 88;
+    second->next = third;
+    third->value = 16;
+    third->next = fourth;
+    fourth->value = 44;
+    fourth->next = NULL;
+
+    //addingInFront(&head, 33);
+    //insetAfter(fourth, 77);
+    //insetAfter(head, 25);
+    insertInTail(&head, 1);
+    printList(head);
+
+
+    return 0;
+}
