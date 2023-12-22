@@ -1,0 +1,15 @@
+//C++ in_built algorithoms
+
+      //sum of min and max val of an array
+      int min = *min_element(A, A+N);
+    	int max = *max_element(A, A+N);
+    	return (min+ max);
+
+
+    //reverse a string
+string reverseWord(string str)
+    {
+        // Your code goes here
+        reverse(str.begin(), str.end());
+        return str;
+    }
