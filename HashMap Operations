@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    map<string, int> um;
+    
+    //Insertion in Map
+    pair<string, int> p1 = make_pair("Austria", 8);
+    um.insert(p1);
+
+    pair<string, int> p2("Croatia", 9);
+    um.insert(p2);
+
+    um["Spain"] = 5;
+    um["France"] = 10;
+
+    um.insert({"UK", 6});
+    um.insert({"Hungary", 9});
+    um.insert({"Italy", 8});
+    
+    //Updating Values
+    um["UK"] = 5;
+    
+
+    //Searching(Value for THAT key)
+    cout << um.at("UK") << endl;
+    cout << um["Italy"] << endl;
+    
+    //Size
+    cout << "Size : " << um.size() << endl;
+
+    //
+    cout << "Count: " << um.count("Hungary") <<endl;
+    
+    //Iterating using Iterator
+    for(auto i = um.begin(); i != um.end(); i++)
+    {
+        cout<< i->first << " " << i->second << endl;
+
+    }
+
+    //Iterating using Range based loop
+    for(auto i: um)
+    {
+        cout<< i.first << " " << i.second << endl;
+    }
+}
