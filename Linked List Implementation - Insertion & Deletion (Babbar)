@@ -99,7 +99,7 @@ void insertAtLocation(Node* &head, Node* &tail, int data, int pos)
 
 }
 
-void deleteAtPos(Node* &head, int pos)
+void deleteAtPos(Node* &head, Node* &tail, int pos)
 {
     //deleting form head position
     if(pos == 1)
@@ -125,6 +125,12 @@ void deleteAtPos(Node* &head, int pos)
             cnt++;
         }
         //make the prev node point to curr.next node
+        if(curr->next == nullptr)
+        {
+            tail = prev;
+            tail->next = nullptr;
+            return;
+        }
         prev->next = curr->next;
         curr->next = nullptr;
         delete curr;
@@ -134,7 +140,7 @@ void deleteAtPos(Node* &head, int pos)
 
 }
 
-void deleteByVal(Node* &head, int data)
+void deleteByVal(Node* &head, Node* &tail, int data)
 {
     if(head->val == data)
     {
@@ -156,6 +162,12 @@ void deleteByVal(Node* &head, int data)
             //curr will move to next
             curr = curr->next;
 
+        }
+        if(curr->next == nullptr)
+        {
+            tail = prev;
+            tail->next = nullptr;
+            return;
         }
         prev->next = curr->next;
         curr->next = nullptr;
@@ -197,7 +209,7 @@ int main()
     insertAtLocation(head, tail, 75, 7);
     printLinkedList(head);
 
-    deleteByVal(head, 7);
+    deleteAtPos(head, tail, 7);
     cout<< "\nAfter Inserting at tail: " << endl;
     printLinkedList(head);
 
