@@ -1,0 +1,211 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+    public:
+        int val;
+        Node* next;
+
+        Node()
+        {
+            this->val = 0;
+            this->next = nullptr;
+        }
+        Node(int data)
+        {
+            this->val = data;
+            this->next = nullptr;
+        }
+
+        //Destructor
+        ~Node()
+        {   
+            int value = this->val;
+            if(this->next != nullptr)
+            {
+                delete next;
+                this->next = nullptr;
+            }
+            //cout << "\nmemory freed up for " << value << endl;
+        }
+        
+};
+
+Node* insertAtHead(Node* &head, int data)
+{
+    //1. Prepare new node
+    Node* newNode = new Node(data);
+    //2. Make it point to Head
+    newNode->next = head;
+    //3. Make new Node, Head
+    head = newNode;
+
+    return newNode;
+}
+
+void insertAtTail(Node* &head, int data)
+{
+    
+    //1.Prepare new node
+    Node* newNode = new Node(data);
+    //Firstly, if it's empty, then it's be head
+    if(head == nullptr)
+    {
+        head = newNode;
+        return;
+    }
+    //2.Previous node pointing to New node
+    Node* previous = head;
+    while(previous->next != nullptr)
+    {
+        previous = previous->next;
+    }
+    previous->next = newNode;
+
+}
+
+void insertAtTailWithTail(Node* &tail, int data)
+{
+    Node* newNode = new Node(data);
+    tail->next = newNode;
+    tail = newNode;
+
+}
+
+void insertAtLocation(Node* &head, Node* &tail, int data, int pos)
+{
+    //inserting at head
+    if(pos == 1)
+    {
+        insertAtHead(head, data);
+        return;
+    }
+
+    Node* newNode = new Node(data);
+    Node* temp = head;
+    for(int i = 1; i < pos - 1; ++i)
+    {
+        temp = temp->next;
+    }
+    //inserting at tail
+    if(temp->next == nullptr)
+    {
+        insertAtTailWithTail(tail, data);
+        return;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+
+}
+
+void deleteAtPos(Node* &head, int pos)
+{
+    //deleting form head position
+    if(pos == 1)
+    {   
+        Node* temp = head;
+        head = head->next;
+        temp->next = nullptr;
+        delete temp;
+    }
+    else
+    {   
+        //Deleting middle or last node
+        Node* curr = head;
+        Node* prev = nullptr;
+
+        int cnt = 1;
+        while(cnt < pos)
+        {
+            //make prev point to curr
+            prev = curr;
+            //curr will move to next
+            curr = curr->next;
+            cnt++;
+        }
+        //make the prev node point to curr.next node
+        prev->next = curr->next;
+        curr->next = nullptr;
+        delete curr;
+
+
+    }
+
+}
+
+void deleteByVal(Node* &head, int data)
+{
+    if(head->val == data)
+    {
+        Node* temp = head;
+        head = head->next;
+        temp->next = nullptr;
+        delete temp;
+    }
+    else
+    {
+        //Deleting middle or last node
+        Node* curr = head;
+        Node* prev = nullptr;
+
+        while(curr->val != data)
+        {
+            //make prev point to curr
+            prev = curr;
+            //curr will move to next
+            curr = curr->next;
+
+        }
+        prev->next = curr->next;
+        curr->next = nullptr;
+        delete curr;
+    }
+}
+
+void printLinkedList(Node* &head)
+{
+    Node* temp = head;
+    while(temp != nullptr)
+    {
+        cout<< temp->val << " ";
+        temp = temp->next;
+    }
+}
+
+int main()
+{
+
+    Node* head = nullptr;
+    Node* tail =nullptr;
+   
+    Node* newNode = new Node(71); 
+
+    head = newNode;
+    tail = newNode;
+
+    insertAtHead(head, 55);
+    insertAtHead(head, 7);
+
+    //cout<< "Printing the linked list: " << endl;
+    //printLinkedList(head);
+    
+    insertAtTailWithTail(tail, 33);
+    insertAtTailWithTail(tail, 13);
+
+    insertAtLocation(head, tail, 99, 3);
+    insertAtLocation(head, tail, 75, 7);
+    printLinkedList(head);
+
+    deleteByVal(head, 7);
+    cout<< "\nAfter Inserting at tail: " << endl;
+    printLinkedList(head);
+
+    cout << "\nhead: " << head->val << " " << endl;
+    cout << "tail: " << tail->val << " " << endl;
+
+
+    delete head;
+
+    
+}
