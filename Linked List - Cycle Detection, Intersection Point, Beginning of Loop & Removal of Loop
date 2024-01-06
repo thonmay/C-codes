@@ -1,0 +1,53 @@
+Node* pointOfIntersection(Node* head)
+{
+    if(head == nullptr) return nullptr;
+    if(head -> next == nullptr) return nullptr;
+    if(head -> next == head) return head;
+    
+    Node* slow = head;
+    Node* fast = head;
+    while(fast != nullptr)
+    {
+        slow = slow -> next;
+        fast = fast -> next;
+        if(fast != nullptr) fast = fast -> next;
+        if(slow == fast)
+        {
+            return slow;
+        }
+    }
+    return nullptr;
+}
+
+Node* begOfLoop(Node* head)
+{
+    if(head == nullptr) return nullptr;
+    if(head -> next == head) return head;
+    
+    Node* intersectNode = pointOfIntersection(head);
+    if(intersectNode == nullptr) return nullptr;
+    
+    Node* slow = head;
+    while(slow != intersectNode)
+    {
+        slow = slow -> next;
+        intersectNode = intersectNode -> next;
+    }
+    return intersectNode;
+    
+}
+
+void removeLoop(Node* head)
+    {
+        if(head == nullptr) return;
+        Node* begNode = begOfLoop(head);
+          
+        if(begNode == nullptr) return;
+
+        Node* temp = begNode;
+        while(temp -> next != begNode)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = nullptr;
+  }
